@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Professionals\Schemas;
 
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -12,10 +13,10 @@ class ProfessionalForm
     {
         return $schema
             ->components([
-                TextInput::make('clinic_id')
-                    ->label('ID da clínica')
-                    ->required()
-                    ->numeric(),
+                Select::make('clinic_id')
+                    ->label('Clínica')
+                    ->relationship('clinic', 'name')
+                    ->required(),
                 TextInput::make('first_name')
                     ->label('Nome')
                     ->required(),

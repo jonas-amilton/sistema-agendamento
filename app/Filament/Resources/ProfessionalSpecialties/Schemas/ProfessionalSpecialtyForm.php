@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ProfessionalSpecialties\Schemas;
 
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -11,14 +12,14 @@ class ProfessionalSpecialtyForm
     {
         return $schema
             ->components([
-                TextInput::make('professional_id')
-                    ->label('ID do Profissional')
+                Select::make('professional_id')
+                    ->label('Profissional')
+                    ->relationship('professional', 'first_name')
+                    ->required(),
+                Select::make('specialty_id')
+                    ->label('Especialidade')
+                    ->relationship('specialty', 'name')
                     ->required()
-                    ->numeric(),
-                TextInput::make('specialty_id')
-                    ->label('ID da Especialidade')
-                    ->required()
-                    ->numeric(),
             ]);
     }
 }

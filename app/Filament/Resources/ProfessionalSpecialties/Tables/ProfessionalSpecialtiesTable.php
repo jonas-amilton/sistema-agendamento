@@ -14,12 +14,12 @@ class ProfessionalSpecialtiesTable
     {
         return $table
             ->columns([
-                TextColumn::make('professional_id')
-                    ->label('ID do Profissional')
+                TextColumn::make('professional.first_name')
+                    ->label('Profissional')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('specialty_id')
-                    ->label('ID da Especialidade')
+                TextColumn::make('specialty.name')
+                    ->label('Especialidade')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')

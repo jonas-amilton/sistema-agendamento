@@ -14,16 +14,16 @@ class AppointmentsTable
     {
         return $table
             ->columns([
-                TextColumn::make('clinic_id')
-                    ->label('ID da Clínica')
+                TextColumn::make('clinic.name')
+                    ->label('Clínica')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('patient_id')
-                    ->label('ID do Paciente')
+                TextColumn::make('patient.first_name')
+                    ->label('Paciente')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('professional_id')
-                    ->label('ID do Profissional')
+                TextColumn::make('professional.first_name')
+                    ->label('Profissional')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('start_time')
@@ -36,6 +36,29 @@ class AppointmentsTable
                     ->sortable(),
                 TextColumn::make('status')
                     ->label('Status')
+                    ->badge()
+                    ->color(fn($state): string => match ($state) {
+                        'scheduled' => 'primary',
+                        'completed' => 'success',
+                        'cancelled' => 'danger',
+                        'no_show' => 'warning',
+                        default => 'secondary',
+                    })
+                    ->icon(fn($state): string => match ($state) {
+                        'scheduled' => 'heroicon-o-calendar',
+                        'completed' => 'heroicon-o-check',
+                        'cancelled' => 'heroicon-o-x',
+                        'no_show' => 'heroicon-o-user-x',
+                        default => 'heroicon-o-question-mark-circle',
+                    })
+                    ->formatStateUsing(fn($state) => match ($state) {
+                        'scheduled' => 'Agendado',
+                        'completed' => 'Concluído',
+                        'cancelled' => 'Cancelado',
+                        'no_show' => 'Não compareceu',
+                        default => $state,
+                    })
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('duration_minutes')
                     ->label('Duração (minutos)')

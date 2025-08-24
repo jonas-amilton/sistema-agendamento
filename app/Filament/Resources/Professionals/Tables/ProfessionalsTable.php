@@ -14,8 +14,8 @@ class ProfessionalsTable
     {
         return $table
             ->columns([
-                TextColumn::make('clinic_id')
-                    ->label('ID da Clínica')
+                TextColumn::make('clinic.name')
+                    ->label('Clínica')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('first_name')

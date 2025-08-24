@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Appointments\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
@@ -13,26 +14,32 @@ class AppointmentForm
     {
         return $schema
             ->components([
-                TextInput::make('clinic_id')
-                    ->label('ID da Clínica')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('patient_id')
-                    ->label('ID do Paciente')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('professional_id')
-                    ->label('ID do Profissional')
-                    ->required()
-                    ->numeric(),
+                Select::make('clinic_id')
+                    ->label('Clínica')
+                    ->relationship('clinic', 'name')
+                    ->required(),
+                Select::make('patient_id')
+                    ->label('Paciente')
+                    ->relationship('patient', 'first_name')
+                    ->required(),
+                Select::make('professional_id')
+                    ->label('Profissional')
+                    ->relationship('professional', 'first_name')
+                    ->required(),
                 DateTimePicker::make('start_time')
                     ->label('Data e Hora de Início')
                     ->required(),
                 DateTimePicker::make('end_time')
                     ->label('Data e Hora de Término')
                     ->required(),
-                TextInput::make('status')
+                Select::make('status')
                     ->label('Status')
+                    ->options([
+                        'scheduled' => 'Agendado',
+                        'completed' => 'Concluído',
+                        'cancelled' => 'Cancelado',
+                        'no_show' => 'Não compareceu',
+                    ])
                     ->required(),
                 TextInput::make('duration_minutes')
                     ->label('Duração (minutos)')
