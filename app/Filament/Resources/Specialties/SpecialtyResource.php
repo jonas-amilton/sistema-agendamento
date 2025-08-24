@@ -22,6 +22,18 @@ class SpecialtyResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'Especialidades';
 
+    protected static ?string $navigationLabel = 'Especialidades';
+
+    public static function getModelLabel(): string
+    {
+        return 'Especialidade';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Especialidades';
+    }
+
     public static function form(Schema $schema): Schema
     {
         return SpecialtyForm::configure($schema);

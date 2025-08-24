@@ -22,6 +22,18 @@ class ClinicResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'Clinicas';
 
+    protected static ?string $navigationLabel = 'Clinicas';
+
+    public static function getModelLabel(): string
+    {
+        return 'Clinica';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Clinicas';
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ClinicForm::configure($schema);

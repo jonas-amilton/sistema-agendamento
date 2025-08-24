@@ -22,6 +22,18 @@ class ProfessionalResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'Profissional';
 
+    protected static ?string $navigationLabel = 'Profissionais';
+
+    public static function getModelLabel(): string
+    {
+        return 'Profissional';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Profissionais';
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ProfessionalForm::configure($schema);
