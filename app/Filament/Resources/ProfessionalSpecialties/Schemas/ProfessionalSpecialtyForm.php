@@ -12,9 +12,11 @@ class ProfessionalSpecialtyForm
         return $schema
             ->components([
                 TextInput::make('professional_id')
+                    ->label('ID do Profissional')
                     ->required()
                     ->numeric(),
                 TextInput::make('specialty_id')
+                    ->label('ID da Especialidade')
                     ->required()
                     ->numeric(),
             ]);

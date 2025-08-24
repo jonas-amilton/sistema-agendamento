@@ -12,6 +12,7 @@ class SpecialtyForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label('Nome')
                     ->required(),
             ]);
     }
