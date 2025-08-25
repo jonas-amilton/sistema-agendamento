@@ -6,6 +6,7 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Facades\Hash;
 
 class PatientForm
 {
@@ -37,6 +38,11 @@ class PatientForm
                     ->label('Endereço de Email')
                     ->email()
                     ->required(),
+                TextInput::make('password')
+                    ->label('Senha')
+                    ->password()
+                    ->required()
+                    ->dehydrateStateUsing(fn($state) => Hash::make($state)),
                 TextInput::make('address')
                     ->label('Endereço')
                     ->required(),
