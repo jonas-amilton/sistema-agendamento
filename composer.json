@@ -9,10 +9,12 @@
         "php": "^8.2",
         "bezhansalleh/filament-language-switch": "^4.0",
         "filament/filament": "^4.0",
+        "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "*",
-        "reliese/laravel": "^1.4"
+        "reliese/laravel": "^1.4",
+        "tightenco/ziggy": "^2.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
