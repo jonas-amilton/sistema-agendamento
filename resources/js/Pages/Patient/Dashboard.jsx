@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { route } from "ziggy-js";
+import { Badge } from "@/components/ui/badge";
+import { Toast } from "@/components/ui/toast";
 
 export default function Dashboard({ patient, appointments, professionals }) {
     const [openModal, setOpenModal] = useState(false);
+    const [toast, setToast] = useState(null);
 
     const { data, setData, post, processing, errors, reset } = useForm({
         professional_id: "",
@@ -16,15 +19,25 @@ export default function Dashboard({ patient, appointments, professionals }) {
             onSuccess: () => {
                 reset();
                 setOpenModal(false);
+                setToast({
+                    message: "Agendamento criado com sucesso!",
+                    type: "success",
+                });
+            },
+            onError: () => {
+                setToast({
+                    message: "Erro ao criar agendamento.",
+                    type: "error",
+                });
             },
         });
     };
 
     const statusColors = {
-        scheduled: "bg-blue-100 text-blue-800",
-        completed: "bg-green-100 text-green-800",
-        cancelled: "bg-red-100 text-red-800",
-        no_show: "bg-yellow-100 text-yellow-800",
+        scheduled: "scheduled",
+        completed: "completed",
+        cancelled: "cancelled",
+        no_show: "no_show",
     };
 
     return (
@@ -60,13 +73,9 @@ export default function Dashboard({ patient, appointments, professionals }) {
                                     {app.professional.first_name}{" "}
                                     {app.professional.last_name}
                                 </h3>
-                                <span
-                                    className={`px-3 py-1 text-sm rounded-full font-medium ${
-                                        statusColors[app.status]
-                                    }`}
-                                >
+                                <Badge variant={statusColors[app.status]}>
                                     {app.status.replace("_", " ")}
-                                </span>
+                                </Badge>
                             </div>
                             <p className="text-gray-600 mb-2">
                                 <strong>Data:</strong>{" "}
@@ -162,6 +171,15 @@ export default function Dashboard({ patient, appointments, professionals }) {
                         </form>
                     </div>
                 </div>
+            )}
+
+            {/* Toast */}
+            {toast && (
+                <Toast
+                    message={toast.message}
+                    type={toast.type}
+                    onClose={() => setToast(null)}
+                />
             )}
         </div>
     );
