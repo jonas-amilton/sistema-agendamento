@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Head, useForm } from "@inertiajs/react";
 import { route } from "ziggy-js";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export default function Login() {
     const { data, setData, post, processing, errors } = useForm({
         email: "",
         password: "",
-        // remember: false,
     });
+
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        // ativa animação ao montar o componente
+        setMounted(true);
+    }, []);
 
     const submit = (e) => {
         e.preventDefault();
@@ -15,53 +25,72 @@ export default function Login() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#e0f2ff] to-[#cfe8ff]">
             <Head title="Login Paciente" />
 
-            <form
-                onSubmit={submit}
-                className="bg-white p-6 rounded-lg shadow-md w-96 space-y-4"
+            <Card
+                className={`w-full max-w-md shadow-lg border border-border p-6 transform transition-all duration-700 ${
+                    mounted
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 -translate-y-10"
+                }`}
             >
-                <h1 className="text-xl font-bold">Login do Paciente</h1>
+                <CardHeader className="text-center mb-4">
+                    <CardTitle className="text-2xl font-bold text-primary">
+                        Login do Paciente
+                    </CardTitle>
+                </CardHeader>
 
-                <div>
-                    <label className="block mb-1">Email</label>
-                    <input
-                        type="email"
-                        value={data.email}
-                        onChange={(e) => setData("email", e.target.value)}
-                        className="w-full border rounded px-3 py-2"
-                    />
-                    {errors.email && (
-                        <div className="text-red-600 text-sm">
-                            {errors.email}
+                <CardContent>
+                    <form onSubmit={submit} className="space-y-4">
+                        <div>
+                            <Label htmlFor="email">Email</Label>
+                            <Input
+                                id="email"
+                                type="email"
+                                value={data.email}
+                                onChange={(e) =>
+                                    setData("email", e.target.value)
+                                }
+                                className="mt-1 transition focus:ring-2 focus:ring-primary duration-300"
+                                placeholder="seu@email.com"
+                            />
+                            {errors.email && (
+                                <p className="text-destructive text-sm mt-1">
+                                    {errors.email}
+                                </p>
+                            )}
                         </div>
-                    )}
-                </div>
 
-                <div>
-                    <label className="block mb-1">Senha</label>
-                    <input
-                        type="password"
-                        value={data.password}
-                        onChange={(e) => setData("password", e.target.value)}
-                        className="w-full border rounded px-3 py-2"
-                    />
-                    {errors.password && (
-                        <div className="text-red-600 text-sm">
-                            {errors.password}
+                        <div>
+                            <Label htmlFor="password">Senha</Label>
+                            <Input
+                                id="password"
+                                type="password"
+                                value={data.password}
+                                onChange={(e) =>
+                                    setData("password", e.target.value)
+                                }
+                                className="mt-1 transition focus:ring-2 focus:ring-primary duration-300"
+                                placeholder="••••••••"
+                            />
+                            {errors.password && (
+                                <p className="text-destructive text-sm mt-1">
+                                    {errors.password}
+                                </p>
+                            )}
                         </div>
-                    )}
-                </div>
 
-                <button
-                    type="submit"
-                    disabled={processing}
-                    className="bg-blue-600 text-white px-4 py-2 rounded w-full"
-                >
-                    Entrar
-                </button>
-            </form>
+                        <Button
+                            type="submit"
+                            disabled={processing}
+                            className="w-full mt-2 bg-primary hover:bg-primary/90 transition-colors duration-300"
+                        >
+                            Entrar
+                        </Button>
+                    </form>
+                </CardContent>
+            </Card>
         </div>
     );
 }
