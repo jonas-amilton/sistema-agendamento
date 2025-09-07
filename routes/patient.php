@@ -1,19 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Patient\Auth\LoginController;
+use App\Http\Controllers\Patient\Auth\RegisterController;
+use App\Http\Controllers\Patient\DashboardController;
+use App\Http\Controllers\Patient\AppointmentController;
 
 Route::prefix('paciente')->name('patient.')->group(function () {
-    Route::get('login', [\App\Http\Controllers\Patient\Auth\LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('login', [\App\Http\Controllers\Patient\Auth\LoginController::class, 'login']);
-    Route::post('logout', [\App\Http\Controllers\Patient\Auth\LoginController::class, 'logout'])->name('logout');
 
-    Route::get('register', [\App\Http\Controllers\Patient\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
-    Route::post('register', [\App\Http\Controllers\Patient\Auth\RegisterController::class, 'register']);
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [LoginController::class, 'login'])->name('login.post');
 
-    Route::middleware('auth:patients')->group(function () {
-        Route::get('dashboard', [App\Http\Controllers\Patient\DashboardController::class, 'index'])
-            ->name('dashboard');
+    Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('register', [RegisterController::class, 'register'])->name('register.post');
 
-        Route::resource('appointments', \App\Http\Controllers\Patient\AppointmentController::class);
+    Route::middleware('auth.patient')->group(function () {
+        Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::resource('appointments', AppointmentController::class);
     });
 });
