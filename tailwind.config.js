@@ -3,9 +3,9 @@ module.exports = {
     darkMode: ["class"],
     content: [
         "./resources/views/**/*.blade.php",
-        "./resources/js/**/*.jsx",
-        "./resources/js/**/*.tsx",
         "./resources/js/**/*.js",
+        "./app/Http/Livewire/**/*.php",
+        "./resources/views/livewire/**/*.blade.php",
     ],
     theme: {
         extend: {
