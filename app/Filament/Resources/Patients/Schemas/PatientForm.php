@@ -14,10 +14,6 @@ class PatientForm
     {
         return $schema
             ->components([
-                Select::make('clinic_id')
-                    ->label('Clínica')
-                    ->relationship('clinic', 'name')
-                    ->required(),
                 TextInput::make('first_name')
                     ->label('Nome')
                     ->required(),

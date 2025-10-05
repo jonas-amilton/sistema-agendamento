@@ -14,10 +14,6 @@ class PatientsTable
     {
         return $table
             ->columns([
-                TextColumn::make('clinic.name')
-                    ->label('Clínica')
-                    ->numeric()
-                    ->sortable(),
                 TextColumn::make('first_name')
                     ->label('Nome')
                     ->searchable(),
