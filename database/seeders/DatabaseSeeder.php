@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             });
 
             // Criar pacientes para cada clínica
-            \App\Models\Patient::factory(10)->create(['clinic_id' => $clinic->id]);
+            \App\Models\Patient::factory(10);
         });
 
         // Criar agendamentos aleatórios
