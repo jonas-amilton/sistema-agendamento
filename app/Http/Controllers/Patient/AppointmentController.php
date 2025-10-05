@@ -7,7 +7,6 @@ use App\Models\Appointment;
 use App\Models\Professional;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
 
 class AppointmentController extends Controller
 {
@@ -18,16 +17,12 @@ class AppointmentController extends Controller
             ->orderBy('start_time', 'desc')
             ->get();
 
-        return Inertia::render('Patient/Appointments/Index', [
-            'appointments' => $appointments,
-        ]);
+        //
     }
 
     public function create()
     {
-        return Inertia::render('Patient/Appointments/Create', [
-            'professionals' => Professional::all(['id', 'first_name', 'last_name']),
-        ]);
+        //
     }
 
     public function store(Request $request)
@@ -53,10 +48,7 @@ class AppointmentController extends Controller
     {
         $this->authorizePatient($appointment);
 
-        return Inertia::render('Patient/Appointments/Edit', [
-            'appointment' => $appointment,
-            'professionals' => Professional::all(['id', 'first_name', 'last_name']),
-        ]);
+        //
     }
 
     public function update(Request $request, Appointment $appointment)

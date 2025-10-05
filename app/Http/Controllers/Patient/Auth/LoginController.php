@@ -5,13 +5,12 @@ namespace App\Http\Controllers\Patient\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
 
 class LoginController extends Controller
 {
     public function showLoginForm()
     {
-        return Inertia::render('Patient/Auth/Login');
+        return view('patient.auth.login');
     }
 
     public function login(Request $request)
