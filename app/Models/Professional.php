@@ -9,6 +9,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Professional
@@ -36,6 +37,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Professional extends Model
 {
+	use HasFactory;
+
 	protected $table = 'professionals';
 
 	protected $casts = [
@@ -70,5 +73,15 @@ class Professional extends Model
 	public function professional_specialties()
 	{
 		return $this->hasMany(ProfessionalSpecialty::class);
+	}
+
+	public function specialties()
+	{
+		return $this->belongsToMany(
+			Specialty::class,
+			'professional_specialties',
+			'professional_id',
+			'specialty_id'
+		);
 	}
 }
