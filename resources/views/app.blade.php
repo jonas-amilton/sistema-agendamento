@@ -5,17 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title inertia>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-    @routes
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    @viteReactRefresh
-    @vite(['resources/js/app.jsx'])
-    @inertiaHead
+    @livewireStyles
 </head>
 
 <body class="antialiased">
-    @inertia
+    {{ $slot ?? '' }}
+
+    @livewireScripts
 </body>
 
 </html>
