@@ -20,7 +20,7 @@ class AppointmentResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'Agendamentos';
+    protected static ?string $recordTitleAttribute = 'id';
 
     protected static ?string $navigationLabel = 'Agendamentos';
 
