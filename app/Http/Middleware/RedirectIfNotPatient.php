@@ -16,7 +16,7 @@ class RedirectIfNotPatient
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::guard('patients')->check()) {
+        if (!Auth::guard('patient')->check()) {
             return redirect()->route('patient.login');
         }
 
