@@ -58,6 +58,6 @@ class PatientRegister extends Component
 
     public function render()
     {
-        return view('livewire.patient-register')->layout('layouts.patient');
+        return view('livewire.patient-register');
     }
 }

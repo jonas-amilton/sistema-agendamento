@@ -114,6 +114,6 @@ class PatientAppointment extends Component
 
     public function render()
     {
-        return view('livewire.patient-appointment')->layout('layouts.patient');
+        return view('livewire.patient-appointment');
     }
 }

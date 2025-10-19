@@ -180,6 +180,6 @@ class AppointmentBooking extends Component
 
     public function render()
     {
-        return view('livewire.appointment-booking')->layout('app');
+        return view('livewire.appointment-booking');
     }
 }

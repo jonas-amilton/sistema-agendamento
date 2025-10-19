@@ -44,6 +44,6 @@ class PatientDashboard extends Component
 
     public function render()
     {
-        return view('livewire.patient-dashboard')->layout('layouts.patient');
+        return view('livewire.patient-dashboard');
     }
 }

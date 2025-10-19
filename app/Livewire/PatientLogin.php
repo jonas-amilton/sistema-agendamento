@@ -16,7 +16,7 @@ class PatientLogin extends Component
             ? ['email' => $this->emailOrPhone, 'password' => $this->password]
             : ['phone' => $this->emailOrPhone, 'password' => $this->password];
 
-        if (Auth::guard('web')->attempt($credentials)) {
+        if (Auth::guard('patients')->attempt($credentials)) {
             session()->regenerate();
             return redirect()->route('patient.dashboard');
         }
@@ -26,6 +26,6 @@ class PatientLogin extends Component
 
     public function render()
     {
-        return view('livewire.patient-login')->layout('layouts.patient');
+        return view('livewire.patient-login');
     }
 }
