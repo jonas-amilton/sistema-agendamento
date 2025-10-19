@@ -20,21 +20,11 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        // dd($credentials);
-
-        // dd(Auth::guard('patients')->attempt($credentials));
-
-        if (Auth::guard('patients')->attempt($credentials)) {
+        if (Auth::guard('patient')->attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-
             return redirect()->intended(route('patient.dashboard'));
         }
 
-        // if (Auth::guard('patients')->attempt($credentials, $request->boolean('remember'))) {
-        //     $request->session()->regenerate();
-
-        //     return redirect()->intended(route('patient.dashboard'));
-        // }
 
         return back()->withErrors([
             'email' => 'As credenciais fornecidas estão incorretas.',
@@ -43,7 +33,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::guard('patients')->logout();
+        Auth::guard('patient')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

@@ -31,7 +31,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        Auth::guard('patients')->login($patient);
+        Auth::guard('patient')->login($patient);
 
         return redirect()->route('patient.dashboard');
     }

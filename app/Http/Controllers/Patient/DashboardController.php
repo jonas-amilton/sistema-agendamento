@@ -4,20 +4,16 @@ namespace App\Http\Controllers\Patient;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use App\Models\Patient;
+use App\Models\Appointment;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $patient = Auth::guard('patients')->user();
+        $appointments = Appointment::where('patient_id', Auth::guard('patient')->id())
+            ->orderBy('start_time', 'asc')
+            ->get();
 
-        $patient = Patient::with([
-            'appointments.professional',
-            'clinic.professionals',
-        ])->find(Auth::guard('patients')->id());
-
-
-        //
+        return view('patient.dashboard', compact('appointments'));
     }
 }

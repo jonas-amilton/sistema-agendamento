@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Patient;
 
 use App\Http\Controllers\Controller;
-use App\Models\Appointment;
-use App\Models\Professional;
+use App\Models\{
+    Appointment,
+    Professional,
+    Specialty
+};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,12 +15,10 @@ class AppointmentController extends Controller
 {
     public function index()
     {
-        $appointments = Appointment::with('professional')
-            ->where('patient_id', Auth::guard('patients')->id())
-            ->orderBy('start_time', 'desc')
-            ->get();
+        $specialties = Specialty::all();
+        $professionals = Professional::all();
 
-        //
+        return view('patient.appointment', compact('specialties', 'professionals'));
     }
 
     public function create()
@@ -27,56 +28,21 @@ class AppointmentController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'professional_id' => 'required|exists:professionals,id',
-            'start_time'      => 'required|date|after:now',
-        ]);
-
-        Appointment::create([
-            'patient_id'      => Auth::guard('patients')->id(),
-            'professional_id' => $data['professional_id'],
-            'clinic_id'       => Auth::guard('patients')->user()->clinic_id,
-            'start_time'      => $data['start_time'],
-            'status'          => 'scheduled',
-            'duration_minutes' => 30,
-        ]);
-
-        return redirect()->route('patient.appointments.index');
+        //
     }
 
     public function edit(Appointment $appointment)
     {
-        $this->authorizePatient($appointment);
-
         //
     }
 
     public function update(Request $request, Appointment $appointment)
     {
-        $this->authorizePatient($appointment);
-
-        $data = $request->validate([
-            'start_time' => 'required|date|after:now',
-        ]);
-
-        $appointment->update($data);
-
-        return redirect()->route('patient.appointments.index');
+        //
     }
 
     public function destroy(Appointment $appointment)
     {
-        $this->authorizePatient($appointment);
-
-        $appointment->update(['status' => 'cancelled']);
-
-        return redirect()->route('patient.appointments.index');
-    }
-
-    private function authorizePatient(Appointment $appointment)
-    {
-        if ($appointment->patient_id !== Auth::guard('patients')->id()) {
-            abort(403, 'Acesso negado.');
-        }
+        //
     }
 }
