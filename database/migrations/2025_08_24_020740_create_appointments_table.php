@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('clinic_id')->constrained()->onDelete('cascade');
             $table->foreignId('patient_id')->constrained()->onDelete('cascade');
             $table->foreignId('professional_id')->constrained()->onDelete('cascade');
-            $table->timestamp('start_time')->useCurrent();
-            $table->timestamp('end_time')->nullable();
+            $table->dateTime('start_time')->useCurrent();
+            $table->dateTime('end_time')->nullable();
             $table->enum('status', ['scheduled', 'completed', 'cancelled', 'no_show']);
             $table->integer('duration_minutes');
             $table->text('notes')->nullable();
