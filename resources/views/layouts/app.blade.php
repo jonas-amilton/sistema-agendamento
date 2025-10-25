@@ -12,8 +12,10 @@
     <header class="flex justify-between items-center p-4 bg-gray-800 shadow">
         <div class="text-2xl font-bold text-yellow-400">{{ config('app.name', 'Mary Help') }}</div>
         <nav>
-            <a href="{{ route('patient.login') }}"
-                class="bg-yellow-400 text-gray-900 px-4 py-2 rounded font-semibold hover:bg-yellow-500 transition">Login</a>
+            @if (!auth())
+                <a href="{{ route('patient.login') }}"
+                    class="bg-yellow-400 text-gray-900 px-4 py-2 rounded font-semibold hover:bg-yellow-500 transition">Login</a>
+            @endif
         </nav>
     </header>
 
@@ -24,6 +26,8 @@
     <footer class="p-4 text-center text-gray-500 text-sm">
         &copy; {{ date('Y') }} Mary Help
     </footer>
+
+    <script src="//unpkg.com/alpinejs" defer></script>
 </body>
 
 </html>
