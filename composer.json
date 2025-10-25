@@ -11,7 +11,10 @@
         "filament/filament": "^4.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "livewire/livewire": "^3.6",
+        "livewire/volt": "^1.7",
         "reliese/laravel": "^1.4",
+        "robsontenorio/mary": "^2.4",
         "tightenco/ziggy": "^2.5"
     },
     "require-dev": {
